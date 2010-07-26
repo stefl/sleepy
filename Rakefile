@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "sleepy"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "Memcached API consumer"
+    gem.description = "Uses Weary and Memcached to make for responsive mashups"
     gem.email = "stef@stef.io"
     gem.homepage = "http://github.com/steflewandowski/sleepy"
     gem.authors = ["steflewandowski"]
