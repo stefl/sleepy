@@ -1,4 +1,6 @@
 require 'memcached'
+require 'weary'
+
 # This requires Memcached to be running on your system.
 module Weary
   

@@ -1,5 +1,31 @@
 = sleepy
 
+Tired of API requests failing or taking a long time on your mashup?
+
+Sleepy uses memcached to cache API responses for a set time to reduce load on external services, and falls back to the last working response for a request on timeout or failure.  
+
+Based on: http://github.com/mwunsch/weary
+
+Example:
+
+class TwitterUser < Weary::Base
+	
+	domain "http://twitter.com/users/"
+	
+	get "show" do |resource|
+		resource.with = [:id, :user_id, :screen_name]
+	end
+end
+
+user = TwitterUser.new
+me = user.show(:id => "markwunsch").perform_sleepily
+puts me["name"]
+
+(turn off your internet connection)
+
+me = user.show(:id => "markwunsch").perform_sleepily
+puts me["name"]
+
 Description goes here.
 
 == Note on Patches/Pull Requests
