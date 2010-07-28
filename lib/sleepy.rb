@@ -43,7 +43,7 @@ module Weary
           
           response = Response.new(req, self)
           begin
-            if response.redirected? && follows?
+            if response.redirected?
               response.follow_redirect
             else
               on_complete.call(response) if on_complete
