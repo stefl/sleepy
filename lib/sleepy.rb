@@ -1,4 +1,11 @@
-require 'memcached'
+begin
+  require 'memcached'
+  HAS_MEMCACHE = true
+rescue
+  HAS_MEMCACHE = false
+  puts "Sleepy with no Memcached"
+end
+
 require 'weary'
 
 # This requires Memcached to be running on your system.
@@ -21,7 +28,11 @@ module Weary
     
     def perform_sleepily(timeout=60*60*1000, &block)
       @on_complete = block if block_given?
-      response = perform_sleepily!(timeout)
+      if HAS_MEMCACHE
+        response = perform_sleepily!(timeout)
+      else
+        response = perform
+      end
       response.value
     end
     
