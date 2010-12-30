@@ -14,7 +14,7 @@ module Weary
   class Request
     
     def self.sleepy
-      @@sleepy ||= Memcached.new
+      @@sleepy ||= Memcached.new(ENV["MEMCACHE_SERVERS"])
     end
     
     def sleepy
@@ -64,7 +64,7 @@ module Weary
               sleepy.set("0:#{uri}", response)
             end
           rescue
-            sleepy.get("0:#{uri}") rescue nil
+            response = sleepy.get("0:#{uri}") rescue nil
           end
           response
         end
